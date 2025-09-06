@@ -1,119 +1,77 @@
-# ✅ Todo App - Flutter & BLoC
+# Todo App - Flutter & BLoC
+[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/Wello69/todo-app-flutter-bloc)
 
-A simple, responsive **Todo application** built with **Flutter**, leveraging the **BLoC (Business Logic Component)** pattern for robust state management.  
-This app empowers users to manage their tasks efficiently with features like adding, deleting, searching, and marking todos as complete.  
+A simple and responsive Todo application built with Flutter, demonstrating state management using the BLoC (Business Logic Component) pattern. The app allows users to manage their tasks with features like adding, deleting, searching, and marking todos as complete. User sessions are managed locally to ensure a personalized experience.
 
-User sessions are persisted locally using **SharedPreferences**, ensuring a personalized experience across sessions.  
-Designed with **Clean Architecture**, it separates UI from business logic, making the app **scalable** and **maintainable**.
+## Features
 
----
+-   **User Session Management**: A simple login system that persists the user's email using `shared_preferences`.
+-   **CRUD Operations for Todos**: Create, read, update (toggle completion), and delete todos.
+-   **User-Specific Todos**: All todos are associated with the logged-in user's email.
+-   **Search Functionality**: Instantly filter and search through your todo list.
+-   **Deadline Support**: Add an optional deadline to your todos.
+-   **Clean Architecture**: State management is handled cleanly by the BLoC pattern, separating UI from business logic.
 
-## 🚀 Features
-- **User Session Management**: Seamless login system that saves the user's email locally with SharedPreferences.  
-- **CRUD Operations**: Create, Read, Update (toggle completion), and Delete todos.  
-- **User-Specific Todos**: Tasks are tied to the logged-in user's email for privacy and organization.  
-- **Search Functionality**: Instantly filter todos by title or description.  
-- **Deadline Support**: Add optional deadlines to todos (e.g., *"Finish report by 10/10/2025"*).  
-- **Clean Architecture**: Decouples UI from business logic for reusability and testability.  
+## Technical Stack
 
----
+-   **Framework**: [Flutter](https://flutter.dev/)
+-   **State Management**: [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+-   **Local Storage**: [shared_preferences](https://pub.dev/packages/shared_preferences) for session and todo persistence.
+-   **Value Equality**: [equatable](https://pub.dev/packages/equatable) to simplify BLoC state comparisons.
 
-## 🛠️ Technical Stack
-- **Framework**: [Flutter](https://flutter.dev/)  
-- **State Management**: [flutter_bloc](https://pub.dev/packages/flutter_bloc)  
-- **Local Storage**: [shared_preferences](https://pub.dev/packages/shared_preferences)  
-- **Value Equality**: [equatable](https://pub.dev/packages/equatable)  
-- **Annotations**: [meta](https://pub.dev/packages/meta)  
+## Project Structure
 
----
+The project is organized into logical directories to maintain a clean and scalable codebase.
 
-## 📂 Project Structure
+```
 lib/
 ├── blocs/
-│ ├── auth_bloc/ # Handles authentication state (login, logout, status)
-│ │ ├── auth_bloc.dart
-│ │ ├── auth_event.dart
-│ │ └── auth_state.dart
-│ └── todo_bloc/ # Handles todo state (load, add, delete, search)
-│ ├── todo_bloc.dart
-│ ├── todo_event.dart
-│ └── todo_state.dart
+│   ├── auth_bloc/      # Manages authentication state (login, logout)
+│   └── todo_bloc/      # Manages state for all todo operations (load, add, delete, etc.)
 ├── models/
-│ ├── todo.dart # Todo model (id, title, description, etc.)
-│ └── user.dart # User model (email)
+│   ├── todo.dart       # Data model for a Todo item
+│   └── user.dart       # Data model for a User
 ├── screens/
-│ ├── add_todo_screen.dart # Add new todos with form fields
-│ ├── login_screen.dart # Login screen with email input
-│ └── todo_list_screen.dart# Main todo list screen
+│   ├── add_todo_screen.dart    # UI for adding a new todo
+│   ├── login_screen.dart       # UI for user login
+│   └── todo_list_screen.dart   # Main screen displaying the list of todos
 ├── services/
-│ └── shared_prefs_service.dart # Handles SharedPreferences operations
+│   └── shared_prefs_service.dart # Service for interacting with SharedPreferences
 └── widgets/
-├── search_bar.dart # Reusable search bar
-└── todo_item.dart # Widget for displaying todo items
+    ├── search_bar.dart  # Reusable search bar widget
+    └── todo_item.dart   # Reusable widget for displaying a single todo
+```
 
-markdown
-Copy code
+-   **`blocs`**: Contains all the Business Logic Components.
+    -   `AuthBloc`: Handles user authentication logic. It processes `LoginEvent`, `LogoutEvent`, and `CheckAuthStatusEvent`, emitting states like `Authenticated` and `Unauthenticated`.
+    -   `TodoBloc`: Manages the state of the todo list. It responds to events like `LoadTodosEvent`, `AddTodoEvent`, and `SearchTodosEvent` to manipulate and provide the list of todos to the UI.
+-   **`models`**: Defines the data structures (`Todo`, `User`) used throughout the application.
+-   **`screens`**: Contains the widgets that represent the different screens of the app.
+-   **`services`**: Includes services that interact with external sources or provide utilities, such as `SharedPrefsService` for data persistence.
+-   **`widgets`**: Holds reusable UI components that are used across multiple screens, like `TodoItem` and `SearchBar`.
 
----
+## Getting Started
 
-## 🔄 Blocs Overview
-- **AuthBloc**  
-  - Handles authentication lifecycle.  
-  - Events: `LoginEvent`, `LogoutEvent`, `CheckAuthStatusEvent`.  
-  - States: `Authenticated`, `Unauthenticated`.  
-
-- **TodoBloc**  
-  - Manages the todo list.  
-  - Events: `LoadTodosEvent`, `AddTodoEvent`, `ToggleTodoEvent`, `DeleteTodoEvent`, `SearchTodosEvent`.  
-  - States update the todo list accordingly.  
-
----
-
-## ▶️ Getting Started
+To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
-- Install [Flutter SDK](https://flutter.dev/docs/get-started/install).  
-- Ensure **Git** is installed (`git --version`).  
 
-### Installation
-```bash
-# 1. Clone the repository
-git clone https://github.com/Wello69/todo-app-flutter-bloc.git
+-   [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your machine.
 
-# 2. Navigate to project
-cd todo-app-flutter-bloc
+### Installation & Running
 
-# 3. Install dependencies
-flutter pub get
-
-# 4. Run the app
-flutter run
-👉 Make sure you have a connected device/emulator before running.
-
-Troubleshooting
-Run flutter doctor to check environment.
-
-If issues persist, clear cache:
-
-bash
-Copy code
-flutter clean
-flutter pub get
-🤝 Contributing
-Fork the repository.
-
-Create a new branch (git checkout -b feature/your-feature).
-
-Commit your changes (git commit -m 'Add some feature').
-
-Push to the branch (git push origin feature/your-feature).
-
-Open a Pull Request.
-
-📜 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-📩 Contact
-For questions or collaboration:
-📧 wello6668@gmail.com
-Or open an issue on GitHub.
+1.  **Clone the repository:**
+    ```sh
+    git clone https://github.com/wello69/todo-app-flutter-bloc.git
+    ```
+2.  **Navigate to the project directory:**
+    ```sh
+    cd todo-app-flutter-bloc
+    ```
+3.  **Install dependencies:**
+    ```sh
+    flutter pub get
+    ```
+4.  **Run the app:**
+    ```sh
+    flutter run
