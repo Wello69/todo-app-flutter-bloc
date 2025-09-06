@@ -18,6 +18,7 @@ A simple, responsive Todo application built with Flutter, leveraging the BLoC (B
 - **Metadata**: meta for type safety and annotations.
 
 ## Project Structure
+
 The codebase is organized into logical directories for scalability and clarity:
 lib/
 ├── blocs/
@@ -41,6 +42,7 @@ lib/
 └── widgets/
 ├── search_bar.dart  # Reusable search bar widget
 └── todo_item.dart   # Reusable widget for individual todo items
+
 text### Blocs Overview
 - **AuthBloc**: Handles user authentication lifecycle. Responds to `LoginEvent`, `LogoutEvent`, and `CheckAuthStatusEvent`, emitting states like `Authenticated` or `Unauthenticated`.
 - **TodoBloc**: Manages the todo list. Processes events like `LoadTodosEvent`, `AddTodoEvent`, `ToggleTodoEvent`, `DeleteTodoEvent`, and `SearchTodosEvent` to update and display the todo list.
